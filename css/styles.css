@@ -451,6 +451,15 @@ button { cursor: pointer; }
   color: #cbd2d9;
   text-align: center;
 }
+.marquee__logo {
+  max-width: 85%;
+  max-height: 68%;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.7);
+  opacity: 0.85;
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+.marquee__tile:hover .marquee__logo { filter: none; opacity: 1; }
 
 .marquee__fade {
   position: absolute;
