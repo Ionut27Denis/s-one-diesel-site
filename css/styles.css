@@ -105,6 +105,11 @@ button { cursor: pointer; }
 }
 .btn--call:hover { filter: brightness(1.12); }
 
+@media (max-width: 640px) {
+  /* Pe mobil butonul de sunat din header e redundant cu fab-ul flotant. */
+  .btn--call { display: none; }
+}
+
 .btn--outline {
   gap: 10px;
   padding: 20px 28px;
