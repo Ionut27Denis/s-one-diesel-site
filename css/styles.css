@@ -87,8 +87,6 @@ button { cursor: pointer; }
 .btn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  border-radius: 3px;
   font-family: var(--font-cond);
   font-weight: 700;
   text-transform: uppercase;
@@ -96,7 +94,9 @@ button { cursor: pointer; }
 }
 
 .btn--call {
+  gap: 10px;
   padding: 11px 18px;
+  border-radius: 3px;
   background: linear-gradient(180deg, #e2172c, var(--accent-dark-2));
   color: #fff;
   font-size: clamp(16px, 2vw, 20px);
@@ -105,7 +105,156 @@ button { cursor: pointer; }
 }
 .btn--call:hover { filter: brightness(1.12); }
 
-.btn__icon { font-size: 15px; }
+.btn--outline {
+  gap: 10px;
+  padding: 20px 28px;
+  border-radius: 4px;
+  border: 1px solid #454c55;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: clamp(18px, 2.2vw, 22px);
+}
+.btn--outline:hover { background: rgba(255, 255, 255, 0.09); border-color: #6b737c; }
+
+.btn__icon { font-size: 22px; }
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: calc(100vh - 74px);
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: clamp(40px, 7vh, 90px) clamp(18px, 5vw, 72px);
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(135deg, #1b2026 0 14px, #171b21 14px 28px);
+  opacity: 0.9;
+}
+
+.hero__bg-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 16px;
+}
+.hero__bg-caption span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #6c757e;
+  letter-spacing: 0.06em;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(9, 10, 12, 0.96) 0%, rgba(9, 10, 12, 0.82) 45%, rgba(9, 10, 12, 0.35) 100%);
+}
+
+.hero__content {
+  position: relative;
+  max-width: 900px;
+  animation: soneFadeUp 0.7s ease both;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  border: 1px solid #3a4048;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: #d6dce2;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  margin-top: 22px;
+  font-size: clamp(40px, 7.2vw, 94px);
+  letter-spacing: -0.01em;
+}
+.hero__title-grad {
+  background: linear-gradient(180deg, #ffffff 0%, #d6dbe0 42%, #8f979f 52%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero__title-accent { color: var(--accent-bright); }
+
+.hero__lead {
+  margin-top: 22px;
+  max-width: 680px;
+  font-size: clamp(17px, 2.1vw, 23px);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.hero__lead strong { color: #fff; font-weight: 600; }
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 30px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #e2172c, var(--accent-dark));
+  color: #fff;
+  border-top: 1px solid var(--accent-border);
+  box-shadow: 0 14px 40px rgba(207, 18, 37, 0.34);
+  animation: sonePulse 2.6s infinite;
+}
+.hero-cta:hover { filter: brightness(1.12); }
+
+.hero-cta__icon { font-size: 26px; line-height: 1; }
+
+.hero-cta__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+.hero-cta__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  opacity: 0.85;
+}
+.hero-cta__number {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(14px, 3vw, 38px);
+  margin-top: 40px;
+  padding-top: 26px;
+  border-top: 1px solid var(--border-strong);
+}
+
+.stat { display: flex; align-items: baseline; gap: 9px; }
+.stat__num { font-family: var(--font-cond); font-size: 30px; font-weight: 700; color: var(--accent-bright); }
+.stat__label { font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
 
 /* ── Header ────────────────────────────────────────────────────────────── */
 .site-header {
