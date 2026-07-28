@@ -479,3 +479,47 @@ button { cursor: pointer; }
   color: var(--text-faint-2);
 }
 .marquee__note a { font-weight: 600; }
+
+/* ── Brands box (chip-uri mărci) ───────────────────────────────────────── */
+.brands-box {
+  margin: 44px clamp(18px, 5vw, 72px) 0;
+  padding: 28px clamp(20px, 3vw, 34px);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+}
+
+.brands-box__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+}
+.brands-box__title { font-size: 22px; color: #fff; }
+.brands-box__sub { font-size: 14px; color: var(--text-faint); }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.chip {
+  padding: 9px 16px;
+  border: 1px solid #2d333a;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-cond);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #d3d9df;
+}
+
+.brands-box__note {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--text-faint-2);
+}
+.brands-box__note a { font-weight: 600; }
