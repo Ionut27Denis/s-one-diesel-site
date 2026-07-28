@@ -522,4 +522,69 @@ button { cursor: pointer; }
   font-size: 14px;
   color: var(--text-faint-2);
 }
+
+/* ── Prețuri ───────────────────────────────────────────────────────────── */
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 38px;
+}
+
+.price-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 30px 26px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--bg-card-alt), var(--bg-card));
+}
+.price-card__name { font-size: 23px; color: #fff; }
+.price-card__amount-row { display: flex; align-items: baseline; gap: 8px; }
+.price-card__prefix {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.price-card__amount {
+  font-family: var(--font-cond);
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-bright);
+}
+.price-card__note { font-size: 15px; line-height: 1.6; color: #a7aeb6; }
+
+.info-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 26px;
+  padding: 20px 24px;
+  border: 1px solid #3a2a2d;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  background: rgba(207, 18, 37, 0.07);
+}
+.info-banner__icon { font-size: 20px; }
+.info-banner__text { flex: 1 1 320px; font-size: 16px; line-height: 1.6; color: var(--text-dim); }
+.info-banner__text strong { color: #fff; }
+.info-banner__cta {
+  padding: 14px 22px;
+  border-radius: 3px;
+  border: 1px solid var(--accent-light);
+  background: transparent;
+  color: var(--accent-lighter);
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.info-banner__cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 .brands-box__note a { font-weight: 600; }
