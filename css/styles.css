@@ -221,7 +221,7 @@ button { cursor: pointer; }
 }
 .hero-cta:hover { filter: brightness(1.12); }
 
-.hero-cta__icon { font-size: 26px; line-height: 1; }
+.hero-cta__icon { font-size: 36px; line-height: 1; }
 
 .hero-cta__text {
   display: flex;
