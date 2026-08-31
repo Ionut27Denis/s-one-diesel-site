@@ -1,3 +1,71 @@
+/* ── Fonturi (găzduite local) ──────────────────────────────────────────── */
+/* Subset Latin-1 + română, generat din TTF-urile OFL din assets/_originals/fonts/.
+   Înainte se încărcau de la fonts.googleapis.com printr-un <link> care bloca
+   randarea; vezi assets/fonts/README.md pentru comenzile de regenerare.
+   Numele fișierelor conțin .v1 — dacă schimbi charset-ul, incrementează la .v2
+   aici și în cele două <link rel="preload"> din index.html, altfel vizitatorii
+   revin cu fontul vechi din cache (headerul e immutable pe un an). */
+
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/barlow-400.v1.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/barlow-600.v1.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/barlow-700.v1.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/barlow-condensed-700.v1.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-400.v1.woff2') format('woff2');
+}
+
+/* Fallback-uri cu metrici potrivite. Nu transferă niciun octet — folosesc fonturi
+   deja instalate, ajustate să ocupe exact aceeași lățime ca fontul real, ca textul
+   să nu sară când acesta sosește (CLS). Valorile sunt măsurate pe textul real al
+   paginii: Arial e cu 3,1% mai lat decât Barlow, iar Arial Narrow Bold cu 19,0%
+   mai lat decât Barlow Condensed Bold.
+   Limitare: Arial Narrow nu există pe Android/iOS, deci fallback-ul condensat
+   ajută doar pe desktop. Pe mobil apărarea e <link rel="preload">. */
+@font-face {
+  font-family: 'Barlow Fallback';
+  src: local('Arial'), local('Helvetica'), local('Liberation Sans');
+  size-adjust: 96.9%;
+  ascent-override: 103.1%;
+  descent-override: 20.6%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Barlow Condensed Fallback';
+  src: local('Arial Narrow'), local('Liberation Sans Narrow');
+  size-adjust: 84.1%;
+  ascent-override: 119.0%;
+  descent-override: 23.8%;
+  line-gap-override: 0%;
+}
+
 /* ── Variables ─────────────────────────────────────────────────────────── */
 :root {
   --bg: #0c0e10;
@@ -20,9 +88,9 @@
   --accent-lighter: #ff8f97;
   --accent-border: #ff7b85;
 
-  --font-cond: 'Barlow Condensed', 'Barlow', sans-serif;
-  --font-sans: 'Barlow', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-cond: 'Barlow Condensed', 'Barlow Condensed Fallback', 'Barlow', sans-serif;
+  --font-sans: 'Barlow', 'Barlow Fallback', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Consolas', monospace;
 }
 
 /* ── Reset & base ──────────────────────────────────────────────────────── */
@@ -299,7 +367,9 @@ body.has-modal { overflow: hidden; }
   background: var(--bg-card);
 }
 .feature-strip__icon { font-size: 20px; }
-.feature-strip__label { font-size: 15px; color: #cbd2d9; font-weight: 500; }
+/* 600, nu 500 — nu mai livrăm Barlow 500. Fără asta CSS-ul ar coborî pe 400,
+   iar banda și-ar pierde accentul față de textul curent. */
+.feature-strip__label { font-size: 15px; color: #cbd2d9; font-weight: 600; }
 
 /* ── Section shared ────────────────────────────────────────────────────── */
 .section { padding: clamp(60px, 9vh, 110px) clamp(18px, 5vw, 72px); }
@@ -536,7 +606,7 @@ body.has-modal { overflow: hidden; }
   background: rgba(255, 255, 255, 0.03);
   font-family: var(--font-cond);
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700; /* 700, nu 600 — livrăm doar Barlow Condensed 700 */
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #d3d9df;
@@ -788,7 +858,7 @@ body.has-modal { overflow: hidden; }
   text-align: left;
   font-family: var(--font-cond);
   font-size: 21px;
-  font-weight: 600;
+  font-weight: 700; /* 700, nu 600 — livrăm doar Barlow Condensed 700 */
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }

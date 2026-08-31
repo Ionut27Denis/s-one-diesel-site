@@ -1,0 +1,35 @@
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_value error_log "/home/sonediesel/logs/php.error.log"
+   php_flag log_errors On
+</IfModule>
+<IfModule lsapi_module>
+   php_value error_log "/home/sonediesel/logs/php.error.log"
+   php_flag log_errors On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# =========================================================================
+# Adaugat manual (fonturi gazduite local). Blocul cPanel de mai sus este
+# generat automat - nu-l edita, il rescrie MultiPHP INI Editor.
+# =========================================================================
+
+# Tipul MIME corect pentru woff2 - unele build-uri cPanel il servesc altfel.
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+</IfModule>
+
+# Fonturile au versiunea in numele fisierului (...v1.woff2), deci pot fi
+# cache-uite un an fara risc: o regenerare inseamna un nume nou (.v2), nu un
+# fisier schimbat. Restul resurselor (css/, js/, assets/*.png) raman pe
+# politica implicita a serverului (max-age=604800) - nu au versionare in nume,
+# iar un cache lung le-ar bloca la urmatoarea editare.
+<IfModule mod_headers.c>
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

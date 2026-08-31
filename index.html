@@ -24,9 +24,13 @@
 <meta name="twitter:image" content="https://sonediesel.ro/assets/logo-sone-diesel.png">
 <meta name="geo.region" content="RO-DB">
 <link rel="icon" href="assets/logo-sone-diesel.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Fonturile sunt găzduite local (vezi @font-face în css/styles.css). Preîncărcăm
+     doar cele două folosite deasupra pliului: titlurile și textul curent. Mai multe
+     ar concura cu styles.css exact în momentul critic.
+     `crossorigin` e obligatoriu chiar dacă fișierele sunt pe același domeniu —
+     fonturile se cer mereu în mod CORS, iar fără el se descarcă de două ori. -->
+<link rel="preload" href="assets/fonts/barlow-condensed-700.v1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-400.v1.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
 <script type="application/ld+json">
 {
