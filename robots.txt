@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/_originals/
+
+Sitemap: https://sonediesel.ro/sitemap.xml

@@ -53,6 +53,18 @@
     }
   ];
 
+  // ── Modal open/close helpers ─────────────────────────────────────────
+  // Reținem elementul care a deschis modalul ca să-i redăm focusul la închidere.
+  let lastFocused = null;
+
+  function showModal(overlay) {
+    lastFocused = document.activeElement;
+    overlay.classList.add("is-open");
+    document.body.classList.add("has-modal");
+    const closeBtn = overlay.querySelector(".modal-close");
+    if (closeBtn) closeBtn.focus();
+  }
+
   // ── Service modal ────────────────────────────────────────────────────
   const serviceModal = document.getElementById("serviceModal");
   const serviceTitle = document.getElementById("serviceModalTitle");
@@ -72,7 +84,7 @@
       li.innerHTML = '<span class="modal-check">✓</span>' + b;
       serviceBullets.appendChild(li);
     });
-    serviceModal.classList.add("is-open");
+    showModal(serviceModal);
   }
 
   document.querySelectorAll("[data-service]").forEach((btn) => {
@@ -93,7 +105,7 @@
     galleryAfter.innerHTML = g.afterLabel;
     galleryTitle.textContent = g.title;
     galleryCaption.textContent = g.caption;
-    galleryModal.classList.add("is-open");
+    showModal(galleryModal);
   }
 
   document.querySelectorAll("[data-gallery]").forEach((btn) => {
@@ -104,7 +116,11 @@
   const modals = [serviceModal, galleryModal].filter(Boolean);
 
   function closeAllModals() {
+    if (!modals.some((m) => m.classList.contains("is-open"))) return;
     modals.forEach((m) => m.classList.remove("is-open"));
+    document.body.classList.remove("has-modal");
+    if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
+    lastFocused = null;
   }
 
   modals.forEach((overlay) => {
@@ -117,8 +133,33 @@
     btn.addEventListener("click", closeAllModals);
   });
 
+  // Escape închide; Tab rămâne prins în interiorul modalului deschis.
+  const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeAllModals();
+    if (e.key === "Escape") {
+      closeAllModals();
+      return;
+    }
+    if (e.key !== "Tab") return;
+
+    const open = modals.find((m) => m.classList.contains("is-open"));
+    if (!open) return;
+
+    const items = Array.from(open.querySelectorAll(FOCUSABLE)).filter(
+      (el) => el.getClientRects().length > 0
+    );
+    if (!items.length) return;
+
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
 
   // ── FAQ accordion (single item open at a time) ────────────────────────
@@ -131,10 +172,12 @@
       faqItems.forEach((other) => {
         other.classList.remove("is-open");
         other.querySelector(".faq-sign").textContent = "+";
+        other.querySelector(".faq-question").setAttribute("aria-expanded", "false");
       });
       if (!wasOpen) {
         item.classList.add("is-open");
         item.querySelector(".faq-sign").textContent = "−";
+        question.setAttribute("aria-expanded", "true");
       }
     });
   });

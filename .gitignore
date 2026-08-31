@@ -1,3 +1,7 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# Imaginile-sursa la rezolutie mare. Nu se publica: in site intra doar
+# variantele optimizate din assets/ si assets/brands/.
+assets/_originals/

@@ -62,6 +62,26 @@ button { cursor: pointer; }
 
 ::selection { background: var(--accent); color: #fff; }
 
+/* ── Accesibilitate ────────────────────────────────────────────────────── */
+/* Contur vizibil la navigarea cu tastatura (nu si la click cu mouse-ul). */
+:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Cat timp un modal e deschis, pagina din spate nu mai defileaza. */
+body.has-modal { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ── Keyframes ─────────────────────────────────────────────────────────── */
 @keyframes soneFadeUp {
   from { opacity: 0; transform: translateY(18px); }
