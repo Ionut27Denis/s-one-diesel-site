@@ -3,7 +3,7 @@
     {
       title: "Diagnosticare & reparații injectoare Common Rail",
       lead: "Orice injector Common Rail, orice marcă populară: demontare, curățare cu ultrasunete, măsurători pe banc și înlocuirea pieselor uzate.",
-      price: "Diagnosticare: 200 lei (preț standard). Reparația se cotează după diagnosticare și o comunicăm telefonic înainte de lucrare.",
+      price: "Diagnosticare: 75–100 lei per injector, în funcție de model. Reparația se cotează după diagnosticare și o comunicăm telefonic înainte de lucrare.",
       bullets: [
         "Verificare debit, retur și pulverizare pe bancul de probă",
         "Curățare cu ultrasunete și înlocuire duze, ace, garnituri",
@@ -27,7 +27,7 @@
     {
       title: "Testare pe bancul de probă",
       lead: "Nu ghicim: fiecare injector și fiecare pompă trece prin banc înainte și după reparație, cu valori măsurate.",
-      price: "200 lei — preț standard pentru diagnosticarea setului de injectoare pe bancul de probă.",
+      price: "75–100 lei per injector, în funcție de model — fiecare injector verificat separat pe bancul de probă.",
       bullets: [
         "Aparatură de ultimă generație, calibrată",
         "Valori măsurate comparate cu specificația producătorului",
