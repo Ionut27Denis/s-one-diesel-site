@@ -23,7 +23,7 @@ Sursele stau în `_originals/photos/`, cu nume descriptive (`banc-proba-…`,
 | Fișier publicat | Sursă | Unde apare |
 |---|---|---|
 | `servicii/injectoare.v1` | `masa-de-lucru-injectoare-scule` | cardul „Diagnosticare & reparații injectoare" |
-| `servicii/pompe.v1` | `tehnician-repara-pompa` | cardul „Pompe de înaltă presiune" |
+| `servicii/pompe.v2` | `montare-pompa-pe-banc` | cardul „Pompe de înaltă presiune" |
 | `servicii/banc-proba.v1` | `testare-injector-software-banc` | cardul „Testare pe bancul de probă" |
 | `contact/exterior-firma.v1` | `exterior-firma-panou-strada` | deasupra hărții, în Contact |
 | `og-cover.v1.jpg` | `exterior-firma-panou-strada` | `og:image`, `twitter:image`, JSON-LD `image` |
@@ -49,8 +49,8 @@ im.save('assets/servicii/injectoare.v1.webp', quality=74, method=6)
 Parametrii folosiți: servicii `raport=2.25, latime=900` (cutia din CSS e
 `height:168px` pe toată lățimea cardului, iar `object-fit:cover` taie restul);
 contact `2.37 / 900`; og `1.905 / 1200`. Pozițiile verticale (`sus`) sunt
-`0.25` / `0.20` / `0.20` / `0.10` / `0.05` — alese comparând mai multe variante,
-nu la întâmplare.
+`0.25` (injectoare) / `0.35` (pompe) / `0.20` (banc) / `0.10` (contact) /
+`0.05` (og) — alese comparând mai multe variante, nu la întâmplare.
 
 ## Sigla și siglele de mărci
 
