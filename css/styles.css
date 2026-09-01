@@ -225,29 +225,39 @@ body.has-modal { overflow: hidden; }
 .hero__bg {
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(135deg, #1b2026 0 14px, #171b21 14px 28px);
-  opacity: 0.9;
+  /* Fundal închis sub poză: fără el se vede o fâșie deschisă cât timp se încarcă. */
+  background-color: #14181d;
 }
-
-.hero__bg-caption {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 16px;
+.hero__bg picture,
+.hero__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-.hero__bg-caption span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: #6c757e;
-  letter-spacing: 0.06em;
+.hero__bg img {
+  object-fit: cover;
+  /* Injectorul și bancul stau spre dreapta; ancorăm acolo ca ele să rămână
+     vizibile când tăierea se strânge, fiindcă stânga e oricum sub overlay. */
+  object-position: 62% center;
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, rgba(9, 10, 12, 0.96) 0%, rgba(9, 10, 12, 0.82) 45%, rgba(9, 10, 12, 0.35) 100%);
+}
+
+/* Pe ecrane înalte (mobil) textul se întinde pe toată lățimea, deci gradientul
+   orizontal de mai sus l-ar lăsa peste partea transparentă, exact unde poza e
+   luminoasă — măsurat, contrastul cădea la 1,65:1 (pragul e 4,5:1). Aici
+   întunecăm uniform, pe verticală. Cel mai deschis pixel al pozei sub text e
+   alb pur, ceea ce cere minimum 0,72 opacitate; ținem 0,82 ca marjă.
+   Pragul se potrivește cu <source media="(min-aspect-ratio: 1/1)"> din HTML,
+   deci tăietura lată merge mereu cu overlay-ul orizontal. */
+@media (max-aspect-ratio: 1/1) {
+  .hero__overlay {
+    background: linear-gradient(180deg, rgba(9, 10, 12, 0.90) 0%, rgba(9, 10, 12, 0.82) 45%, rgba(9, 10, 12, 0.94) 100%);
+  }
 }
 
 .hero__content {

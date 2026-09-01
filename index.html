@@ -135,9 +135,18 @@
 </header>
 
 <section id="top" class="hero">
-  <div class="hero__bg" aria-hidden="true"></div>
-  <div class="hero__bg-caption" aria-hidden="true">
-    <span>[ FOTO FUNDAL: injector Common Rail pe bancul de probă / atelier — 2400×1400px ]</span>
+  <!-- Poza e decorativă (alt=""): tot ce spune e deja în <h1>. Două tăieturi
+       diferite, alese după forma ecranului, nu după lățime — heroul ocupă toată
+       înălțimea, deci ce contează e dacă fereastra e lată sau înaltă.
+       Browserul descarcă un singur fișier din tot blocul. -->
+  <div class="hero__bg" aria-hidden="true">
+    <picture>
+      <source media="(min-aspect-ratio: 1/1)" type="image/webp" srcset="assets/hero/hero-banc-wide.v1.webp">
+      <source media="(min-aspect-ratio: 1/1)" type="image/jpeg" srcset="assets/hero/hero-banc-wide.v1.jpg">
+      <source type="image/webp" srcset="assets/hero/hero-banc-tall.v1.webp">
+      <img src="assets/hero/hero-banc-tall.v1.jpg" alt=""
+           width="1080" height="1440" fetchpriority="high" decoding="async">
+    </picture>
   </div>
   <div class="hero__overlay" aria-hidden="true"></div>
   <div class="hero__content">
