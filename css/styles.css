@@ -236,15 +236,29 @@ body.has-modal { overflow: hidden; }
 }
 .hero__bg img {
   object-fit: cover;
-  /* Injectorul și bancul stau spre dreapta; ancorăm acolo ca ele să rămână
-     vizibile când tăierea se strânge, fiindcă stânga e oricum sub overlay. */
+  /* Pe mobil poza acoperă tot ecranul și `cover` taie lateral; ancorăm spre
+     dreapta ca subiectul să rămână în cadru. */
   object-position: 62% center;
+}
+
+/* Pe ecrane late poza nu mai umple toată lățimea: ocupă 80%, lipită dreapta.
+   Fâșia din stânga rămâne fundalul închis al paginii, deci titlul stă practic
+   pe plat. Pragul e același cu al lui <source media="(min-aspect-ratio: 1/1)">
+   din HTML, ca tăietura lată să meargă mereu cu acest aranjament. */
+@media (min-aspect-ratio: 1/1) {
+  .hero__bg { left: 20%; }
+  /* Tăietura lată e livrată exact pe raportul cutiei, deci nu mai e nevoie
+     de ancorare — `cover` abia dacă taie ceva. */
+  .hero__bg img { object-position: center; }
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(9, 10, 12, 0.96) 0%, rgba(9, 10, 12, 0.82) 45%, rgba(9, 10, 12, 0.35) 100%);
+  /* Rămâne opac până dincolo de marginea stângă a pozei (20%), ca titlul să nu
+     prindă muchia, apoi se limpezește. Ajunge la 0,25 în loc de 0,35 fiindcă
+     poza ocupă acum mai puțină lățime — altfel s-ar vedea prea puțin din ea. */
+  background: linear-gradient(90deg, rgba(9, 10, 12, 0.96) 0%, rgba(9, 10, 12, 0.94) 20%, rgba(9, 10, 12, 0.90) 45%, rgba(9, 10, 12, 0.88) 68%, rgba(9, 10, 12, 0.22) 100%);
 }
 
 /* Pe ecrane înalte (mobil) textul se întinde pe toată lățimea, deci gradientul

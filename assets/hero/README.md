@@ -1,92 +1,83 @@
 # assets/hero/
 
 Poza de fundal a secțiunii hero. Sursa e
-`assets/_originals/photos/raft-injectoare-sortate.jpg` (5472×3648, 20 MP) —
+`assets/_originals/photos/banc-proba-cu-imprimanta.jpg` (3648×5472, 20 MP) —
 folderul `_originals/` e `.gitignore`-uit și nu se urcă pe server.
 
-## De ce două tăieturi
+## Aranjamentul: poza nu ocupă toată lățimea
 
-Heroul ocupă toată înălțimea ecranului, deci e panoramic pe desktop și înalt pe
-mobil. Cu o singură imagine, `object-fit: cover` ar tăia masiv într-unul din
-cazuri. Alegerea se face în `index.html` după **forma ferestrei**, nu după
-lățime (`media="(min-aspect-ratio: 1/1)"`):
+Pe **ecrane late**, poza ocupă **80% din lățime, lipită dreapta**
+(`.hero__bg { left: 20% }`). Fâșia din stânga rămâne fundalul închis al paginii,
+deci titlul stă practic pe plat. Pe **ecrane înalte** (mobil) poza revine la tot
+ecranul, fiindcă nu e loc pentru două zone.
+
+Pragul e `(min-aspect-ratio: 1/1)`, același cu al lui `<source media=…>` din
+`index.html`, ca tăietura lată să meargă mereu cu acest aranjament.
 
 | Fișier | Dimensiune | Când se folosește |
 |---|---|---|
-| `hero-raft-wide.v3.webp` | 1800×947 (~121 KB) | fereastră lată (desktop, telefon în peisaj) |
-| `hero-raft-tall.v3.webp` | 1080×1440 (~106 KB) | fereastră înaltă (telefon, tabletă portret) |
+| `hero-injector-banc-wide.v4.webp` | 1500×1000 (~63 KB) | fereastră lată — cutia e 80% din lățime, deci raport ~1,5 |
+| `hero-injector-banc-tall.v4.webp` | 1080×1440 (~77 KB) | fereastră înaltă — poza pe tot ecranul |
 
-Fiecare are și `.jpg` ca rezervă. **Browserul descarcă un singur fișier** din tot
-blocul `<picture>`.
+Fiecare are și `.jpg` ca rezervă. **Browserul descarcă un singur fișier.**
 
 ## Regenerare
 
 ```python
 from PIL import Image
-src = Image.open('assets/_originals/photos/raft-injectoare-sortate.jpg')
+src = Image.open('assets/_originals/photos/banc-proba-cu-imprimanta.jpg')
 W, H = src.size
 
-# Desktop: bandă panoramică 1.9:1, la 65% de sus — acolo banda de navete roșii
-# cade exact la înălțimea textului, în dreapta unde overlay-ul se limpezește.
-ch = round(W / 1.9)
-wide = src.crop((0, round((H-ch)*0.65), W, round((H-ch)*0.65)+ch)).resize((1800, 947), Image.LANCZOS)
+# Lat: raportul cutiei (80% latime x toata inaltimea) e ~1.5. Taietura la 30%
+# de sus scoate imprimanta din cadru si lasa injectorul cu monitorul.
+ch = round(W / 1.5)
+wide = src.crop((0, round((H-ch)*0.30), W, round((H-ch)*0.30)+ch)).resize((1500, 1000), Image.LANCZOS)
 
-# Mobil: coloană portret 3:4, decalată la 60% spre dreapta.
-cw = round(H * 0.75)
-x0 = round((W - cw) * 0.60)
-tall = src.crop((x0, 0, x0+cw, H)).resize((1080, 1440), Image.LANCZOS)
+# Inalt: raport 3:4 pentru mobil.
+chh = round(W / 0.75)
+tall = src.crop((0, round((H-chh)*0.20), W, round((H-chh)*0.20)+chh)).resize((1080, 1440), Image.LANCZOS)
 
-for name, im in (('hero-raft-wide.v3', wide), ('hero-raft-tall.v3', tall)):
-    im.save(f'assets/hero/{name}.jpg',  'JPEG', quality=70, optimize=True, progressive=True)
-    im.save(f'assets/hero/{name}.webp', 'WEBP', quality=58, method=6)
+for name, im in (('hero-injector-banc-wide.v4', wide), ('hero-injector-banc-tall.v4', tall)):
+    im.save(f'assets/hero/{name}.jpg',  'JPEG', quality=78, optimize=True, progressive=True)
+    im.save(f'assets/hero/{name}.webp', 'WEBP', quality=74, method=6)
 ```
 
-**Calitatea e mai mică decât în restul proiectului** (58 față de 74). Poza are
-sute de obiecte mici, deci comprimă prost — la q74 ieșea 166 KB. Comparate la
-100% zoom în zona cea mai luminoasă a overlay-ului, q58 și q74 sunt
-indistinctibile: aici nu există text fin de protejat, spre deosebire de o poză
-anterioară unde scăderea calității înmuia vizibil scrisul de pe monitor. Dacă
-schimbi poza pe una cu text sau linii fine, **urcă înapoi la 74 și remăsoară**.
+## Contrastul textului — de remăsurat la orice schimbare
 
-## Ce face o poză bună de hero aici
+Overlay-ul are **două forme**:
 
-Overlay-ul e aproape negru în stânga (0,96) și se limpezește spre dreapta (0,35).
-Deci **nu contează cât de frumoasă e poza, ci dacă are structura potrivită**:
-stânga fără detalii importante (se topește sub text), dreapta cu subiectul.
-
-Toate cele 20 de fotografii au fost compuse cu overlay-ul real și măsurate.
-Contrastul textului trece la toate (≥6,2:1) — deci nu el decide, ci compoziția.
-Poze care umplu tot cadrul cu verdele bancului devin o pastă verde-murdară sub
-gradient; cele cu un monitor luminos fix în dreapta îl transformă într-un
-dreptunghi ars.
-
-## Contrastul textului — de remăsurat la orice schimbare de poză
-
-Overlay-ul are **două forme**, iar asta nu e opțional:
-
-- ecrane late → gradient orizontal (`0,96 → 0,35`), fiindcă textul stă în stânga;
-- ecrane înalte → gradient vertical care nu coboară sub `0,82`, fiindcă acolo
+- ecrane late → gradient orizontal, cu **platou opac până la 68%** din lățime,
+  apoi cădere rapidă la 0,22;
+- ecrane înalte → gradient vertical care nu coboară sub 0,82, fiindcă acolo
   textul se întinde pe toată lățimea.
 
-Fără al doilea, textul ajunge peste partea transparentă a gradientului
-orizontal. Măsurat pe o poză anterioară, contrastul cădea la **1,65:1** față de
-pragul de 4,5:1 — ilizibil.
+**Platoul până la 68% nu e arbitrar și nu-l scurta fără să remăsori.** Coloana de
+text are lățime fixă (`max-width: 900px`), deci pe un ecran mai îngust se întinde
+proporțional mai spre dreapta, unde poza e luminoasă. Cu un gradient care se
+limpezea de la 45%, contrastul măsura 6,28:1 la 1920px dar cădea la **4,10:1 la
+1440px** și **2,57:1 la 1280px** — sub pragul de 4,5:1. Verifică întotdeauna la
+**1280px**, nu doar la rezoluția ta.
 
-Valorile măsurate cu poza actuală:
+Valorile cu poza și gradientul actuale (cel mai slab caz, 1280×646): **5,69:1**.
 
 | | titlu (prag 3,0) | text lead (prag 4,5) |
 |---|---|---|
-| Desktop 1920×1006 | 9,17:1 | 5,71:1 |
-| Mobil 390×770 | 11,10:1 | 6,91:1 |
-| Mobil 360×680 | 11,20:1 | 6,97:1 |
+| Desktop 1920×1006 | 10,09:1 | 6,28:1 |
+| Desktop 1280×646 (cel mai slab) | — | 5,69:1 |
+| Mobil 390×770 | 10,82:1 | 6,74:1 |
 
-**Dacă schimbi poza, remăsoară.** Una mai luminoasă poate cere mai mult.
-Procedura: compune poza cu gradientul, ia cel mai deschis pixel din zona
-textului (stânga sus până la 900px lățime pe desktop, toată lățimea pe mobil) și
-verifică raportul de contrast față de `#b9c1c9` — trebuie ≥ 4,5:1.
+Procedura: compune poza cu gradientul la mai multe lățimi (1280, 1440, 1920,
+2560), ia cel mai deschis pixel din zona textului și verifică raportul față de
+`#b9c1c9` — trebuie ≥ 4,5:1 la toate.
+
+## Ce face o poză bună de hero aici
+
+Stânga fără detalii importante (e sub partea opacă), dreapta cu subiectul. Toate
+cele 20 de fotografii au fost compuse cu overlay-ul real și măsurate: contrastul
+trece la toate, deci decide compoziția, nu contrastul.
 
 ## Versionarea din nume
 
-`.v3` permite cache lung fără ca vizitatorii vechi să rămână cu poza precedentă.
-Dacă regenerezi cu altă tăietură sau altă sursă, incrementează la `.v4` în numele
+`.v4` permite cache lung fără ca vizitatorii vechi să rămână cu poza precedentă.
+Dacă regenerezi cu altă tăietură sau altă sursă, incrementează la `.v5` în numele
 fișierelor **și** în cele patru referințe din `index.html`.
