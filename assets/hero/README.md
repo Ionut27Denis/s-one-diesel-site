@@ -1,6 +1,6 @@
 # assets/hero/
 
-Poza de fundal a secțiunii hero. Sursa e `assets/_originals/hero/IMG_7672.jpg`
+Poza de fundal a secțiunii hero. Sursa e `assets/_originals/photos/sesiune-anterioara/IMG_7672.jpg`
 (3648×4864, 17,7 MP) — folderul e `.gitignore`-uit și nu se urcă pe server.
 
 ## De ce două tăieturi
@@ -25,7 +25,7 @@ descarcă un singur fișier din tot blocul `<picture>`.**
 
 ```python
 from PIL import Image
-src = Image.open('assets/_originals/hero/IMG_7672.jpg')
+src = Image.open('assets/_originals/photos/sesiune-anterioara/IMG_7672.jpg')
 W, H = src.size
 CH = round(W / 1.9)                       # raportul heroului pe desktop
 

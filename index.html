@@ -13,15 +13,15 @@
 <meta property="og:description" content="Diagnosticare și reparații injectoare orice marcă. Aparatură nouă, garanție 12 luni, gata în 24h. Trimitem piese prin curier în toată țara.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sonediesel.ro/">
-<meta property="og:image" content="https://sonediesel.ro/assets/logo-sone-diesel.png">
-<meta property="og:image:width" content="925">
-<meta property="og:image:height" content="417">
-<meta property="og:image:alt" content="Sigla S ONE DIESEL SRL">
+<meta property="og:image" content="https://sonediesel.ro/assets/og-cover.v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Atelierul S ONE DIESEL din Decindeni, cu panoul „Reparații injectoare” deasupra intrării">
 <meta property="og:locale" content="ro_RO">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="S ONE DIESEL — Reparații Injectoare &amp; Pompe de Injecție, Dâmbovița">
 <meta name="twitter:description" content="Diagnosticare și reparații injectoare orice marcă. Aparatură nouă, garanție 12 luni, gata în 24h. Trimitem piese prin curier în toată țara.">
-<meta name="twitter:image" content="https://sonediesel.ro/assets/logo-sone-diesel.png">
+<meta name="twitter:image" content="https://sonediesel.ro/assets/og-cover.v1.jpg">
 <meta name="geo.region" content="RO-DB">
 <link rel="icon" href="assets/logo-sone-diesel.png">
 <!-- Fonturile sunt găzduite local (vezi @font-face în css/styles.css). Preîncărcăm
@@ -43,7 +43,7 @@
       "alternateName": "S ONE DIESEL — Reparații Injectoare Dâmbovița",
       "description": "Service specializat în diagnosticarea și repararea injectoarelor auto Common Rail și a pompelor de injecție de înaltă presiune. Aparatură de ultimă generație, testare pe banc de probă, garanție 12 luni, timp de execuție 24 de ore.",
       "url": "https://sonediesel.ro/",
-      "image": "https://sonediesel.ro/assets/logo-sone-diesel.png",
+      "image": "https://sonediesel.ro/assets/og-cover.v1.jpg",
       "logo": "https://sonediesel.ro/assets/logo-sone-diesel.png",
       "slogan": "Eficiență maximă cu injectoare recondiționate",
       "telephone": "+40738210233",
@@ -190,7 +190,13 @@
   </div>
   <div class="services-grid">
     <button type="button" class="service-card" data-service="0" aria-haspopup="dialog">
-      <div class="service-card__photo"><span>[ FOTO: injector demontat pe masa de lucru ]</span></div>
+      <div class="service-card__photo">
+        <picture>
+          <source type="image/webp" srcset="assets/servicii/injectoare.v1.webp">
+          <img src="assets/servicii/injectoare.v1.jpg" width="900" height="400" loading="lazy" decoding="async"
+               alt="Masa de lucru din atelier, cu injectoare pe raft, microscop și scule pe panou">
+        </picture>
+      </div>
       <div class="service-card__body">
         <h3 class="service-card__title">Diagnosticare &amp; reparații injectoare Common Rail</h3>
         <p class="service-card__lead">Orice injector Common Rail, orice marcă populară: demontare, curățare cu ultrasunete, măsurători pe banc și înlocuirea pieselor uzate.</p>
@@ -198,7 +204,13 @@
       </div>
     </button>
     <button type="button" class="service-card" data-service="1" aria-haspopup="dialog">
-      <div class="service-card__photo"><span>[ FOTO: pompă de înaltă presiune pe stand ]</span></div>
+      <div class="service-card__photo">
+        <picture>
+          <source type="image/webp" srcset="assets/servicii/pompe.v1.webp">
+          <img src="assets/servicii/pompe.v1.jpg" width="900" height="400" loading="lazy" decoding="async"
+               alt="Tehnician lucrând la o pompă de injecție de înaltă presiune prinsă în menghină">
+        </picture>
+      </div>
       <div class="service-card__body">
         <h3 class="service-card__title">Diagnosticare &amp; reparații pompe de înaltă presiune</h3>
         <p class="service-card__lead">Pompe de injecție de înaltă presiune pentru majoritatea motorizărilor — verificăm presiunea, regulatorul și uzura internă.</p>
@@ -206,7 +218,13 @@
       </div>
     </button>
     <button type="button" class="service-card" data-service="2" aria-haspopup="dialog">
-      <div class="service-card__photo"><span>[ FOTO: banc de probă în funcțiune ]</span></div>
+      <div class="service-card__photo">
+        <picture>
+          <source type="image/webp" srcset="assets/servicii/banc-proba.v1.webp">
+          <img src="assets/servicii/banc-proba.v1.jpg" width="900" height="400" loading="lazy" decoding="async"
+               alt="Injector montat pe bancul de probă, lângă ecranul care afișează valorile măsurate">
+        </picture>
+      </div>
       <div class="service-card__body">
         <h3 class="service-card__title">Testare pe bancul de probă</h3>
         <p class="service-card__lead">Nu ghicim: fiecare injector și fiecare pompă trece prin banc înainte și după reparație, cu valori măsurate.</p>
@@ -485,6 +503,13 @@
     </div>
 
     <div class="map-card">
+      <!-- Poza de la stradă: cine vine prima dată vede exact ce să caute. -->
+      <picture>
+        <source type="image/webp" srcset="assets/contact/exterior-firma.v1.webp">
+        <img class="map-card__photo" src="assets/contact/exterior-firma.v1.jpg" width="900" height="380"
+             loading="lazy" decoding="async"
+             alt="Intrarea în atelier: panou negru cu „S ONE DIESEL — Reparații injectoare” și numărul 0738210233, deasupra ușii de garaj">
+      </picture>
       <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d55092.04939408499!2d25.334342004581174!3d44.91031148800524!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b2f300575e9eb9%3A0xc20526794a4c2b36!2sRepara%C8%9Bii%20Injectoare%20D%C3%A2mbovi%C8%9Ba%20-S%20ONE%20DIESEL%20SRL!5e0!3m2!1sro!2sro!4v1785243610441!5m2!1sro!2sro" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Locația S ONE DIESEL pe Google Maps"></iframe>
       <div class="map-actions">
         <a href="https://maps.app.goo.gl/yYtqTBEi3bjq3R2m8" target="_blank" rel="noopener" class="map-cta map-cta--primary">Deschide în Google Maps</a>

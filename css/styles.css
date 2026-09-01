@@ -431,19 +431,22 @@ body.has-modal { overflow: hidden; }
 .service-card__photo {
   position: relative;
   height: 168px;
-  background-image: repeating-linear-gradient(135deg, #1b2026 0 12px, #171b21 12px 24px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  text-align: center;
+  overflow: hidden;
+  /* Fundal închis sub poză, ca să nu apară o fâșie deschisă cât se încarcă. */
+  background-color: #14181d;
 }
-.service-card__photo span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: #6f7881;
-  letter-spacing: 0.06em;
+.service-card__photo picture {
+  display: block;
+  height: 100%;
 }
+.service-card__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+.service-card:hover .service-card__photo img { transform: scale(1.04); }
 
 .service-card__body {
   display: flex;
@@ -932,36 +935,34 @@ body.has-modal { overflow: hidden; }
 }
 .btn--outline-sm:hover { background: rgba(255, 255, 255, 0.07); }
 
+/* Poza de la stradă stă deasupra hărții, în flux normal; harta umple restul.
+   Înainte iframe-ul era absolut, pe inset:0 — nu mai poate fi, altfel ar acoperi
+   poza. .map-actions rămâne absolut, suprapus peste marginea de jos a hărții. */
 .map-card {
   position: relative;
   min-height: 380px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--border);
   border-radius: 6px;
-  background-image: repeating-linear-gradient(135deg, #1b2026 0 12px, #171b21 12px 24px);
+  background-color: #14181d;
   overflow: hidden;
 }
-.map-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  text-align: center;
+.map-card > picture {
+  display: block;
+  flex: 0 0 auto;
+}
+.map-card__photo {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
 }
 .map-embed {
-  position: absolute;
-  inset: 0;
+  flex: 1 1 auto;
   width: 100%;
-  height: 100%;
+  min-height: 260px;
   border: 0;
-}
-.map-placeholder span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: #6f7881;
-  letter-spacing: 0.05em;
-  line-height: 1.9;
 }
 .map-actions {
   position: absolute;
