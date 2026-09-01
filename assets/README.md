@@ -11,6 +11,7 @@ assets/
   hero/                     fundalul secțiunii hero           → hero/README.md
   servicii/                 pozele celor 3 carduri de servicii
   contact/                  poza de la stradă, lângă hartă
+  rezultate/                perechea înainte/după din galerie
   _originals/               sursele la rezoluție mare — GITIGNORAT, nu se urcă
 ```
 
@@ -26,6 +27,8 @@ Sursele stau în `_originals/photos/`, cu nume descriptive (`banc-proba-…`,
 | `servicii/pompe.v2` | `montare-pompa-pe-banc` | cardul „Pompe de înaltă presiune" |
 | `servicii/banc-proba.v1` | `testare-injector-software-banc` | cardul „Testare pe bancul de probă" |
 | `contact/exterior-firma.v1` | `exterior-firma-panou-strada` | deasupra hărții, în Contact |
+| `rezultate/injector-inainte.v1` | `_originals/before-after/injector-inainte-de-curatare` | galeria „Înainte / după” |
+| `rezultate/injector-dupa.v1` | `_originals/before-after/injector-dupa-curatare` | galeria „Înainte / după” |
 | `og-cover.v1.jpg` | `exterior-firma-panou-strada` | `og:image`, `twitter:image`, JSON-LD `image` |
 
 Fiecare are `.webp` (servit implicit) și `.jpg` (rezervă). **Excepție:
@@ -72,10 +75,16 @@ Sufixul `.v1` permite cache lung fără riscul ca vizitatorii să rămână cu v
 veche. Dacă regenerezi un fișier cu alt conținut, incrementează la `.v2` **și în
 `index.html`** — altfel schimbarea nu ajunge la cine a vizitat deja site-ul.
 
-## Ce lipsește încă
+## Galeria „Înainte / după"
 
-Secțiunea „Înainte / după" are în continuare placeholder-e text. Niciuna dintre
-cele 20 de fotografii nu arată starea „înainte" — un injector cocsat, o duză
-înfundată. Sunt toate poze curate de atelier și echipament. Ca să se completeze
-onest, e nevoie de perechi fotografiate anume: aceeași piesă înainte de curățare
-și după reparație.
+Prima pereche e completă: același injector, fotografiat înainte și după
+curățare, pe același fundal. **Ambele poze sunt tăiate din exact aceeași cutie**
+(`x=195..4669, y=224..3353` din originalul de 4864×3648) — altfel comparația nu
+ar fi corectă, fiindcă o încadrare diferită poate face piesa să pară mai mare
+sau mai curată decât e.
+
+A doua pereche, cea cu pompa de înaltă presiune, are în continuare
+placeholder-e: nu există fotografii ale unei pompe înainte și după reparație.
+Până apar, cardul rămâne cu textul descriptiv. Modalul afișează automat ce
+există — imagine dacă e definit `beforeSrc`/`afterSrc` în `js/main.js`, altfel
+textul din `beforeLabel`/`afterLabel`.

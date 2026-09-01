@@ -802,7 +802,16 @@ body.has-modal { overflow: hidden; }
   position: relative;
   flex: 1 1 300px;
   height: 260px;
+  overflow: hidden;
+  /* Hașura rămâne pentru perechile care încă n-au fotografii. */
   background-image: repeating-linear-gradient(135deg, #1b2026 0 12px, #171b21 12px 24px);
+}
+.pair-card__image picture { display: block; height: 100%; }
+.pair-card__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .pair-card__label {
   position: absolute;
@@ -1216,6 +1225,17 @@ body.has-modal { overflow: hidden; }
   padding: 24px;
   text-align: center;
 }
+/* În modal folosim `contain`, nu `cover`: e vederea „mărită”, deci nimic nu
+   trebuie tăiat. Pozele au fundal alb, deci marginile se văd ca ramă. */
+.gallery-modal-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.gallery-modal-photo[hidden] { display: none; }
+
 .gallery-modal-image span.pair-card__label {
   position: static;
   font-size: 12px;

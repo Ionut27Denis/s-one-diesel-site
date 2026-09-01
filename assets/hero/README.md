@@ -1,7 +1,7 @@
 # assets/hero/
 
 Poza de fundal a secțiunii hero. Sursa e
-`assets/_originals/photos/banc-proba-cu-imprimanta.jpg` (3648×5472, 20 MP) —
+`assets/_originals/photos/sesiune-anterioara/IMG_7672.jpg` (3648×4864, 17,7 MP) —
 folderul `_originals/` e `.gitignore`-uit și nu se urcă pe server.
 
 ## Aranjamentul: poza nu ocupă toată lățimea
@@ -16,8 +16,8 @@ Pragul e `(min-aspect-ratio: 1/1)`, același cu al lui `<source media=…>` din
 
 | Fișier | Dimensiune | Când se folosește |
 |---|---|---|
-| `hero-injector-banc-wide.v4.webp` | 1500×1000 (~63 KB) | fereastră lată — cutia e 80% din lățime, deci raport ~1,5 |
-| `hero-injector-banc-tall.v4.webp` | 1080×1440 (~77 KB) | fereastră înaltă — poza pe tot ecranul |
+| `hero-banc-injector-wide.v5.webp` | 1500×1000 (~53 KB) | fereastră lată — cutia e 80% din lățime, deci raport ~1,5 |
+| `hero-banc-injector-tall.v5.webp` | 1080×1440 (~62 KB) | fereastră înaltă — poza pe tot ecranul |
 
 Fiecare are și `.jpg` ca rezervă. **Browserul descarcă un singur fișier.**
 
@@ -25,11 +25,10 @@ Fiecare are și `.jpg` ca rezervă. **Browserul descarcă un singur fișier.**
 
 ```python
 from PIL import Image
-src = Image.open('assets/_originals/photos/banc-proba-cu-imprimanta.jpg')
+src = Image.open('assets/_originals/photos/sesiune-anterioara/IMG_7672.jpg')
 W, H = src.size
 
-# Lat: raportul cutiei (80% latime x toata inaltimea) e ~1.5. Taietura la 30%
-# de sus scoate imprimanta din cadru si lasa injectorul cu monitorul.
+# Lat: raportul cutiei (80% latime x toata inaltimea) e ~1.5. Taietura la 30% de sus.
 ch = round(W / 1.5)
 wide = src.crop((0, round((H-ch)*0.30), W, round((H-ch)*0.30)+ch)).resize((1500, 1000), Image.LANCZOS)
 
@@ -37,7 +36,7 @@ wide = src.crop((0, round((H-ch)*0.30), W, round((H-ch)*0.30)+ch)).resize((1500,
 chh = round(W / 0.75)
 tall = src.crop((0, round((H-chh)*0.20), W, round((H-chh)*0.20)+chh)).resize((1080, 1440), Image.LANCZOS)
 
-for name, im in (('hero-injector-banc-wide.v4', wide), ('hero-injector-banc-tall.v4', tall)):
+for name, im in (('hero-banc-injector-wide.v5', wide), ('hero-banc-injector-tall.v5', tall)):
     im.save(f'assets/hero/{name}.jpg',  'JPEG', quality=78, optimize=True, progressive=True)
     im.save(f'assets/hero/{name}.webp', 'WEBP', quality=74, method=6)
 ```
@@ -78,6 +77,6 @@ trece la toate, deci decide compoziția, nu contrastul.
 
 ## Versionarea din nume
 
-`.v4` permite cache lung fără ca vizitatorii vechi să rămână cu poza precedentă.
-Dacă regenerezi cu altă tăietură sau altă sursă, incrementează la `.v5` în numele
+`.v5` permite cache lung fără ca vizitatorii vechi să rămână cu poza precedentă.
+Dacă regenerezi cu altă tăietură sau altă sursă, incrementează la `.v6` în numele
 fișierelor **și** în cele patru referințe din `index.html`.

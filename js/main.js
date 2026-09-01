@@ -40,9 +40,11 @@
 
   const gallery = [
     {
-      title: "Injectoare Common Rail — set de 4",
-      beforeLabel: "[ FOTO ÎNAINTE<br>injector cocsat / duză înfundată<br>1600×1200px ]",
-      afterLabel: "[ FOTO DUPĂ<br>același injector recondiționat<br>1600×1200px ]",
+      title: "Injector Common Rail",
+      beforeSrc: "assets/rezultate/injector-inainte.v1.jpg",
+      beforeAlt: "Injector Common Rail înainte de curățare, cu depuneri de calamină pe vârf și corpul îngălbenit",
+      afterSrc: "assets/rezultate/injector-dupa.v1.jpg",
+      afterAlt: "Același injector după curățare: metal curat, cu capace galbene de protecție montate",
       caption: "Depuneri de calamină și pulverizare neuniformă la intrare. După curățare, înlocuirea pieselor de uzură și testarea pe banc, valorile au revenit în specificația producătorului."
     },
     {
@@ -95,14 +97,30 @@
   const galleryModal = document.getElementById("galleryModal");
   const galleryBefore = document.getElementById("galleryModalBefore");
   const galleryAfter = document.getElementById("galleryModalAfter");
+  const galleryBeforeImg = document.getElementById("galleryModalBeforeImg");
+  const galleryAfterImg = document.getElementById("galleryModalAfterImg");
   const galleryTitle = document.getElementById("galleryModalTitle");
   const galleryCaption = document.getElementById("galleryModalCaption");
+
+  // O parte are ori fotografie, ori textul-substituent — niciodată amândouă.
+  function fillSide(img, label, src, alt, text) {
+    if (src) {
+      img.src = src;
+      img.alt = alt || "";
+      img.hidden = false;
+      label.innerHTML = "";
+    } else {
+      img.hidden = true;
+      img.removeAttribute("src");
+      label.innerHTML = text || "";
+    }
+  }
 
   function openGalleryModal(index) {
     const g = gallery[index];
     if (!g || !galleryModal) return;
-    galleryBefore.innerHTML = g.beforeLabel;
-    galleryAfter.innerHTML = g.afterLabel;
+    fillSide(galleryBeforeImg, galleryBefore, g.beforeSrc, g.beforeAlt, g.beforeLabel);
+    fillSide(galleryAfterImg, galleryAfter, g.afterSrc, g.afterAlt, g.afterLabel);
     galleryTitle.textContent = g.title;
     galleryCaption.textContent = g.caption;
     showModal(galleryModal);

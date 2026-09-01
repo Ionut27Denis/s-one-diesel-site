@@ -141,10 +141,10 @@
        Browserul descarcă un singur fișier din tot blocul. -->
   <div class="hero__bg" aria-hidden="true">
     <picture>
-      <source media="(min-aspect-ratio: 1/1)" type="image/webp" srcset="assets/hero/hero-injector-banc-wide.v4.webp">
-      <source media="(min-aspect-ratio: 1/1)" type="image/jpeg" srcset="assets/hero/hero-injector-banc-wide.v4.jpg">
-      <source type="image/webp" srcset="assets/hero/hero-injector-banc-tall.v4.webp">
-      <img src="assets/hero/hero-injector-banc-tall.v4.jpg" alt=""
+      <source media="(min-aspect-ratio: 1/1)" type="image/webp" srcset="assets/hero/hero-banc-injector-wide.v5.webp">
+      <source media="(min-aspect-ratio: 1/1)" type="image/jpeg" srcset="assets/hero/hero-banc-injector-wide.v5.jpg">
+      <source type="image/webp" srcset="assets/hero/hero-banc-injector-tall.v5.webp">
+      <img src="assets/hero/hero-banc-injector-tall.v5.jpg" alt=""
            width="1080" height="1440" fetchpriority="high" decoding="async">
     </picture>
   </div>
@@ -367,16 +367,28 @@
   <div class="pairs">
     <button type="button" class="pair-card" data-gallery="0" aria-haspopup="dialog">
       <div class="pair-card__head">
-        <h3 class="pair-card__title">Injectoare Common Rail — set de 4</h3>
+        <h3 class="pair-card__title">Injector Common Rail</h3>
         <span class="pair-card__hint">Click pentru mărire</span>
       </div>
+      <!-- Ambele poze sunt tăiate din aceeași cutie, ca să fie o comparație
+           corectă: același cadru, aceeași distanță, doar piesa diferă. -->
       <div class="pair-card__images">
         <div class="pair-card__image">
-          <span class="pair-card__label">[ FOTO ÎNAINTE<br>injector cocsat / duză înfundată<br>1600×1200px ]</span>
+          <picture>
+            <source type="image/webp" srcset="assets/rezultate/injector-inainte.v1.webp">
+            <img class="pair-card__photo" src="assets/rezultate/injector-inainte.v1.jpg"
+                 width="1200" height="839" loading="lazy" decoding="async"
+                 alt="Injector Common Rail înainte de curățare, cu depuneri de calamină pe vârf și corpul îngălbenit">
+          </picture>
           <span class="pair-badge pair-badge--before">Înainte</span>
         </div>
         <div class="pair-card__image">
-          <span class="pair-card__label">[ FOTO DUPĂ<br>același injector recondiționat<br>1600×1200px ]</span>
+          <picture>
+            <source type="image/webp" srcset="assets/rezultate/injector-dupa.v1.webp">
+            <img class="pair-card__photo" src="assets/rezultate/injector-dupa.v1.jpg"
+                 width="1200" height="839" loading="lazy" decoding="async"
+                 alt="Același injector după curățare: metal curat, cu capace galbene de protecție montate">
+          </picture>
           <span class="pair-badge pair-badge--after">După</span>
         </div>
       </div>
@@ -569,11 +581,15 @@
 
 <div class="modal-overlay modal-overlay--gallery" id="galleryModal" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
   <div class="gallery-modal-panel">
+    <!-- Fiecare parte are și imagine, și text: perechile fără fotografii încă
+         afișează descrierea, iar JS arată doar ce există. -->
     <div class="gallery-modal-image">
+      <img class="gallery-modal-photo" id="galleryModalBeforeImg" alt="" hidden>
       <span class="pair-card__label" id="galleryModalBefore"></span>
       <span class="pair-badge pair-badge--before">Înainte</span>
     </div>
     <div class="gallery-modal-image">
+      <img class="gallery-modal-photo" id="galleryModalAfterImg" alt="" hidden>
       <span class="pair-card__label" id="galleryModalAfter"></span>
       <span class="pair-badge pair-badge--after">După</span>
     </div>
