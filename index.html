@@ -396,20 +396,32 @@
     </button>
     <button type="button" class="pair-card" data-gallery="1" aria-haspopup="dialog">
       <div class="pair-card__head">
-        <h3 class="pair-card__title">Pompă de înaltă presiune</h3>
+        <h3 class="pair-card__title">Pompe de înaltă presiune — din atelier</h3>
         <span class="pair-card__hint">Click pentru mărire</span>
       </div>
+      <!-- Sunt două lucrări diferite, nu o pereche înainte/după: de aceea
+           etichetele sunt descriptive, nu „Înainte”/„După”. -->
       <div class="pair-card__images">
         <div class="pair-card__image">
-          <span class="pair-card__label">[ FOTO ÎNAINTE<br>pompă cu uzură internă<br>1600×1200px ]</span>
-          <span class="pair-badge pair-badge--before">Înainte</span>
+          <picture>
+            <source type="image/webp" srcset="assets/rezultate/pompa-demontata.v1.webp">
+            <img class="pair-card__photo" src="assets/rezultate/pompa-demontata.v1.jpg"
+                 width="1200" height="839" loading="lazy" decoding="async"
+                 alt="Pompă de injecție demontată, prinsă în menghină pentru diagnosticare">
+          </picture>
+          <span class="pair-badge pair-badge--neutral">Demontată</span>
         </div>
         <div class="pair-card__image">
-          <span class="pair-card__label">[ FOTO DUPĂ<br>pompă recondiționată și testată<br>1600×1200px ]</span>
-          <span class="pair-badge pair-badge--after">După</span>
+          <picture>
+            <source type="image/webp" srcset="assets/rezultate/pompa-common-rail.v1.webp">
+            <img class="pair-card__photo" src="assets/rezultate/pompa-common-rail.v1.jpg"
+                 width="1200" height="839" loading="lazy" decoding="async"
+                 alt="Pompă Common Rail de înaltă presiune, cu carcasă de aluminiu și supapă de dozare, pregătită pentru montaj">
+          </picture>
+          <span class="pair-badge pair-badge--neutral">Pregătită de montaj</span>
         </div>
       </div>
-      <p class="pair-card__caption">Presiune insuficientă din cauza uzurii interne. Recondiționată complet și testată în sarcină pe stand înainte de livrare.</p>
+      <p class="pair-card__caption">Două lucrări diferite din atelier: o pompă demontată pentru diagnosticare și o pompă Common Rail pregătită pentru montajul pe standul de probă.</p>
     </button>
   </div>
 
@@ -586,12 +598,14 @@
     <div class="gallery-modal-image">
       <img class="gallery-modal-photo" id="galleryModalBeforeImg" alt="" hidden>
       <span class="pair-card__label" id="galleryModalBefore"></span>
-      <span class="pair-badge pair-badge--before">Înainte</span>
+      <!-- Textul și stilul etichetelor vin din js/main.js: unele perechi sunt
+           înainte/după, altele doar două lucrări descrise. -->
+      <span class="pair-badge" id="galleryModalBeforeBadge"></span>
     </div>
     <div class="gallery-modal-image">
       <img class="gallery-modal-photo" id="galleryModalAfterImg" alt="" hidden>
       <span class="pair-card__label" id="galleryModalAfter"></span>
-      <span class="pair-badge pair-badge--after">După</span>
+      <span class="pair-badge" id="galleryModalAfterBadge"></span>
     </div>
     <button type="button" class="modal-close" data-modal-close aria-label="Închide">✕</button>
   </div>

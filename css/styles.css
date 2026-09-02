@@ -840,6 +840,9 @@ body.has-modal { overflow: hidden; }
 }
 .pair-badge--before { border-left: 2px solid var(--text-faint); color: #d3d9df; }
 .pair-badge--after { border-left: 2px solid var(--accent); color: #fff; }
+/* Pentru pozele care descriu o lucrare, nu o etapă dintr-o pereche înainte/după.
+   Deliberat fără accentul roșu, ca să nu citească drept „După”. */
+.pair-badge--neutral { border-left: 2px solid #4a525b; color: #b9c1c9; }
 
 .pair-card__caption { padding: 18px 22px; font-size: 15px; line-height: 1.6; color: #a7aeb6; }
 

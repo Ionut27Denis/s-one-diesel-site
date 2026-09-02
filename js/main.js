@@ -43,15 +43,25 @@
       title: "Injector Common Rail",
       beforeSrc: "assets/rezultate/injector-inainte.v1.jpg",
       beforeAlt: "Injector Common Rail înainte de curățare, cu depuneri de calamină pe vârf și corpul îngălbenit",
+      beforeBadge: "Înainte",
       afterSrc: "assets/rezultate/injector-dupa.v1.jpg",
       afterAlt: "Același injector după curățare: metal curat, cu capace galbene de protecție montate",
+      afterBadge: "După",
+      // Pereche reală: aceeași piesă, același cadru. Etichetele pot fi „Înainte”/„După”.
+      badgeKind: "pair",
       caption: "Depuneri de calamină și pulverizare neuniformă la intrare. După curățare, înlocuirea pieselor de uzură și testarea pe banc, valorile au revenit în specificația producătorului."
     },
     {
-      title: "Pompă de înaltă presiune",
-      beforeLabel: "[ FOTO ÎNAINTE<br>pompă cu uzură internă<br>1600×1200px ]",
-      afterLabel: "[ FOTO DUPĂ<br>pompă recondiționată și testată<br>1600×1200px ]",
-      caption: "Presiune insuficientă din cauza uzurii interne. Recondiționată complet și testată în sarcină pe stand înainte de livrare."
+      title: "Pompe de înaltă presiune — din atelier",
+      beforeSrc: "assets/rezultate/pompa-demontata.v1.jpg",
+      beforeAlt: "Pompă de injecție demontată, prinsă în menghină pentru diagnosticare",
+      beforeBadge: "Demontată",
+      afterSrc: "assets/rezultate/pompa-common-rail.v1.jpg",
+      afterAlt: "Pompă Common Rail de înaltă presiune, cu carcasă de aluminiu și supapă de dozare, pregătită pentru montaj",
+      afterBadge: "Pregătită de montaj",
+      // Două pompe diferite, nu o pereche: etichete descriptive, fără accentul roșu.
+      badgeKind: "neutral",
+      caption: "Două lucrări diferite din atelier: o pompă demontată pentru diagnosticare și o pompă Common Rail pregătită pentru montajul pe standul de probă."
     }
   ];
 
@@ -99,28 +109,34 @@
   const galleryAfter = document.getElementById("galleryModalAfter");
   const galleryBeforeImg = document.getElementById("galleryModalBeforeImg");
   const galleryAfterImg = document.getElementById("galleryModalAfterImg");
+  const galleryBeforeBadge = document.getElementById("galleryModalBeforeBadge");
+  const galleryAfterBadge = document.getElementById("galleryModalAfterBadge");
   const galleryTitle = document.getElementById("galleryModalTitle");
   const galleryCaption = document.getElementById("galleryModalCaption");
 
   // O parte are ori fotografie, ori textul-substituent — niciodată amândouă.
-  function fillSide(img, label, src, alt, text) {
+  function fillSide(img, label, badge, side, g) {
+    const src = g[side + "Src"];
     if (src) {
       img.src = src;
-      img.alt = alt || "";
+      img.alt = g[side + "Alt"] || "";
       img.hidden = false;
       label.innerHTML = "";
     } else {
       img.hidden = true;
       img.removeAttribute("src");
-      label.innerHTML = text || "";
+      label.innerHTML = g[side + "Label"] || "";
     }
+    const kind = g.badgeKind === "pair" ? side : "neutral";
+    badge.className = "pair-badge pair-badge--" + kind;
+    badge.textContent = g[side + "Badge"] || "";
   }
 
   function openGalleryModal(index) {
     const g = gallery[index];
     if (!g || !galleryModal) return;
-    fillSide(galleryBeforeImg, galleryBefore, g.beforeSrc, g.beforeAlt, g.beforeLabel);
-    fillSide(galleryAfterImg, galleryAfter, g.afterSrc, g.afterAlt, g.afterLabel);
+    fillSide(galleryBeforeImg, galleryBefore, galleryBeforeBadge, "before", g);
+    fillSide(galleryAfterImg, galleryAfter, galleryAfterBadge, "after", g);
     galleryTitle.textContent = g.title;
     galleryCaption.textContent = g.caption;
     showModal(galleryModal);

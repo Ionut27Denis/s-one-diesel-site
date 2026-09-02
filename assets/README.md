@@ -29,6 +29,8 @@ Sursele stau în `_originals/photos/`, cu nume descriptive (`banc-proba-…`,
 | `contact/exterior-firma.v1` | `exterior-firma-panou-strada` | deasupra hărții, în Contact |
 | `rezultate/injector-inainte.v1` | `_originals/before-after/injector-inainte-de-curatare` | galeria „Înainte / după” |
 | `rezultate/injector-dupa.v1` | `_originals/before-after/injector-dupa-curatare` | galeria „Înainte / după” |
+| `rezultate/pompa-demontata.v1` | `tehnician-repara-pompa` | cardul „Pompe — din atelier” |
+| `rezultate/pompa-common-rail.v1` | `pompa-inalta-presiune-in-menghina` | cardul „Pompe — din atelier” |
 | `og-cover.v1.jpg` | `exterior-firma-panou-strada` | `og:image`, `twitter:image`, JSON-LD `image` |
 
 Fiecare are `.webp` (servit implicit) și `.jpg` (rezervă). **Excepție:
@@ -83,8 +85,18 @@ curățare, pe același fundal. **Ambele poze sunt tăiate din exact aceeași cu
 ar fi corectă, fiindcă o încadrare diferită poate face piesa să pară mai mare
 sau mai curată decât e.
 
-A doua pereche, cea cu pompa de înaltă presiune, are în continuare
-placeholder-e: nu există fotografii ale unei pompe înainte și după reparație.
-Până apar, cardul rămâne cu textul descriptiv. Modalul afișează automat ce
-există — imagine dacă e definit `beforeSrc`/`afterSrc` în `js/main.js`, altfel
-textul din `beforeLabel`/`afterLabel`.
+Al doilea card, cel cu pompele, **nu e o pereche înainte/după** și nu trebuie
+transformat în una. Cele două fotografii arată pompe diferite: una cu corp de
+oțel oxidat, cealaltă o pompă Common Rail cu carcasă de aluminiu. Curățarea nu
+transformă oțelul în aluminiu, iar dispunerea șuruburilor nu se potrivește — pusă
+sub etichetele „Înainte”/„După”, imaginea ar afirma o reparație care nu s-a
+întâmplat. De aceea cardul se numește „din atelier”, etichetele sunt descriptive
+(`badgeKind: "neutral"` în `js/main.js`, fără accentul roșu) iar textul spune
+explicit că sunt două lucrări diferite.
+
+Dacă apar cândva fotografii ale aceleiași pompe înainte și după reparație,
+schimbă `badgeKind` în `"pair"` și etichetele în „Înainte”/„După”.
+
+Modalul se adaptează singur: afișează imagine dacă e definit `beforeSrc`/
+`afterSrc`, altfel textul din `beforeLabel`/`afterLabel`, iar eticheta o ia din
+`beforeBadge`/`afterBadge`.
